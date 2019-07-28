@@ -7,15 +7,13 @@ import com.prep.android.restaurantapp.network.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
 
 private const val NUMBER_PER_FETCH = 50
 private const val NUMBER_MAX_CACHE = 300
 
 object RestaurantRepository {
     private var api = RetrofitInstance.createService(RestaurantApi::class.java)
-    private val restaurantLiveData =  MutableLiveData<List<RestaurantBrief>>()
+    private val restaurantLiveData = MutableLiveData<List<RestaurantBrief>>()
 
     private var cacheList = arrayListOf<RestaurantBrief>()
     private var cacheOffset = 0
@@ -24,7 +22,7 @@ object RestaurantRepository {
         return restaurantLiveData
     }
 
-    fun fetchMoreRestaurants(lat:Double, lng:Double) {
+    fun fetchMoreRestaurants(lat: Double, lng: Double) {
         api.getRestaurants(lat, lng, cacheOffset, NUMBER_PER_FETCH).enqueue(object : Callback<List<RestaurantBrief>> {
             override fun onResponse(call: Call<List<RestaurantBrief>>, response: Response<List<RestaurantBrief>>) {
                 if (response.isSuccessful && response.body() != null) {
@@ -56,6 +54,7 @@ object RestaurantRepository {
         // in the future
         cacheOffset += newData.size
     }
+
     // Current implemetation does not limit the size of the cache, but we should in reality!!
     // Need also update the RestaurantOnScrollListener for this functionality.
     private fun refactorCache() {

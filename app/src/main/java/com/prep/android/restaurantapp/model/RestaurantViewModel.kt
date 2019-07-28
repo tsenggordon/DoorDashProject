@@ -1,7 +1,6 @@
 package com.prep.android.restaurantapp.model
 
 import android.app.Application
-import android.location.Location
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

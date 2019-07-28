@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 private const val PRELOAD_THRESHOLD = 5
 
-class RestaurantOnScrollListener(private val layoutManager: LinearLayoutManager, private val loadMoreDataCallback: () -> Unit): RecyclerView.OnScrollListener() {
+class RestaurantOnScrollListener(
+    private val layoutManager: LinearLayoutManager,
+    private val loadMoreDataCallback: () -> Unit
+) : RecyclerView.OnScrollListener() {
     private var startLoading = true
     private var previousItemCount = 0
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

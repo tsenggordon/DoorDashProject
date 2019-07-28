@@ -1,10 +1,8 @@
 package com.prep.android.restaurantapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.AndroidViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(RestaurantViewModel::class.java)
         viewModel.clearData()
         fetchData()
-        viewModel.getRestaurantBriefs().observe(this, Observer<List<RestaurantBrief>>{ listOfRestaurants ->
+        viewModel.getRestaurantBriefs().observe(this, Observer<List<RestaurantBrief>> { listOfRestaurants ->
             rvAdaptor.updateList(listOfRestaurants)
         })
     }

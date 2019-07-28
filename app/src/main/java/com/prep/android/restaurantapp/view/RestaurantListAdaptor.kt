@@ -9,7 +9,7 @@ import com.prep.android.restaurantapp.model.RestaurantBrief
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_restaurant.view.*
 
-class RestaurantListAdaptor: RecyclerView.Adapter<RestaurantListAdaptor.RestaurantViewHolder>() {
+class RestaurantListAdaptor : RecyclerView.Adapter<RestaurantListAdaptor.RestaurantViewHolder>() {
     private var items = emptyList<RestaurantBrief>()
 
     fun updateList(newItems: List<RestaurantBrief>) {
@@ -30,7 +30,7 @@ class RestaurantListAdaptor: RecyclerView.Adapter<RestaurantListAdaptor.Restaura
         return items.size
     }
 
-    class RestaurantViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class RestaurantViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: RestaurantBrief) {
             with(itemView) {
                 Picasso.get().load(data.coverImgUrl).into(imageCover)
