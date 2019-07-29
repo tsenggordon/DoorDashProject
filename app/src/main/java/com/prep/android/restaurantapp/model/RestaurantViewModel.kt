@@ -11,6 +11,8 @@ private const val DOORDASH_LOCATION_LNG = -122.139956
 
 class RestaurantViewModel(application: Application) : AndroidViewModel(application) {
     private var _restaurantBriefs = MutableLiveData<List<RestaurantBrief>>()
+    private var _restaurantInfo = MutableLiveData<RestaurantInfo>()
+
     init {
         fetchMoreRestaurant()
     }
@@ -19,9 +21,18 @@ class RestaurantViewModel(application: Application) : AndroidViewModel(applicati
         RestaurantRepository.fetchMoreRestaurants(DOORDASH_LOCATION_LAT, DOORDASH_LOCATION_LNG)
     }
 
+    fun fetchRestaurantInfo(id: Int) {
+        RestaurantRepository.fetchRestaurantInfo(id)
+    }
+
     fun getRestaurantBriefs(): LiveData<List<RestaurantBrief>> {
         _restaurantBriefs = RestaurantRepository.getRestaurantLiveData()
         return _restaurantBriefs
+    }
+
+    fun getRestaurantInfo(): LiveData<RestaurantInfo> {
+        _restaurantInfo = RestaurantRepository.getRestaurantInfoLiveData()
+        return _restaurantInfo
     }
 
     fun clearData() {

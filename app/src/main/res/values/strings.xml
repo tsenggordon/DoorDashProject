@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">RestaurantApp</string>
     <string name="tool_bar_title">Discover</string>
+    <string name="rating_not_available">Rating not available</string>
+    <string name="yelp_rating">Yelp Rating : </string>
+    <string name="yelp_review_count">Review Count : </string>
+    <string name="phone_header">Phone :</string>
 </resources>

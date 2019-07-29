@@ -10,18 +10,18 @@ import com.prep.android.restaurantapp.model.RestaurantBrief
 import com.prep.android.restaurantapp.model.RestaurantViewModel
 import com.prep.android.restaurantapp.view.RestaurantListAdaptor
 import com.prep.android.restaurantapp.view.RestaurantOnScrollListener
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_list.*
 
-class MainActivity : AppCompatActivity() {
+class RestaurantListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: RestaurantViewModel
 
     private val layoutManager = LinearLayoutManager(this)
-    private val rvAdaptor = RestaurantListAdaptor()
+    private val rvAdaptor = RestaurantListAdaptor(::startRestaurantInfoActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list)
         setupUI()
         setupViewModel()
 
@@ -55,5 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchData() {
         viewModel.fetchMoreRestaurant()
+    }
+
+    private fun startRestaurantInfoActivity(id: Int) {
+        val intent = RestaurantInfoActivity.newIntentWithId(id, this)
+        startActivity(intent)
     }
 }

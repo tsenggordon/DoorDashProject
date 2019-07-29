@@ -2,6 +2,7 @@
 <resources>
     <dimen name="font_size_small">12sp</dimen>
     <dimen name="font_size_main">14sp</dimen>
+    <dimen name="font_size_big">20sp</dimen>
 
     <dimen name="single_spacing">4dp</dimen>
     <dimen name="double_spacing">8dp</dimen>

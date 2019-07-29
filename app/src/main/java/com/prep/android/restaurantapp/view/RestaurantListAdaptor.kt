@@ -9,7 +9,7 @@ import com.prep.android.restaurantapp.model.RestaurantBrief
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_restaurant.view.*
 
-class RestaurantListAdaptor : RecyclerView.Adapter<RestaurantListAdaptor.RestaurantViewHolder>() {
+class RestaurantListAdaptor(val onRestaurntClick: (Int) -> Unit) : RecyclerView.Adapter<RestaurantListAdaptor.RestaurantViewHolder>() {
     private var items = emptyList<RestaurantBrief>()
 
     fun updateList(newItems: List<RestaurantBrief>) {
@@ -30,14 +30,18 @@ class RestaurantListAdaptor : RecyclerView.Adapter<RestaurantListAdaptor.Restaur
         return items.size
     }
 
-    class RestaurantViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class RestaurantViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(data: RestaurantBrief) {
             with(itemView) {
                 Picasso.get().load(data.coverImgUrl).into(imageCover)
-                textResName.text = data.name
-                textFoodType.text = data.description
-                textStatus.text = data.status
+                text_item_res_name.text = data.name
+                text_item_food_type.text = data.description
+                text_item_status.text = data.status
+                itemView.setOnClickListener {
+                    onRestaurntClick(data.id)
+                }
             }
         }
     }
+
 }

@@ -2,6 +2,7 @@ package com.prep.android.restaurantapp.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.prep.android.restaurantapp.model.RestaurantBrief
+import com.prep.android.restaurantapp.model.RestaurantInfo
 import com.prep.android.restaurantapp.network.RestaurantApi
 import com.prep.android.restaurantapp.network.RetrofitInstance
 import retrofit2.Call
@@ -13,13 +14,19 @@ private const val NUMBER_MAX_CACHE = 300
 
 object RestaurantRepository {
     private var api = RetrofitInstance.createService(RestaurantApi::class.java)
+
     private val restaurantLiveData = MutableLiveData<List<RestaurantBrief>>()
+    private val restaurantInfoLiveData = MutableLiveData<RestaurantInfo>()
 
     private var cacheList = arrayListOf<RestaurantBrief>()
     private var cacheOffset = 0
 
     fun getRestaurantLiveData(): MutableLiveData<List<RestaurantBrief>> {
         return restaurantLiveData
+    }
+
+    fun getRestaurantInfoLiveData(): MutableLiveData<RestaurantInfo> {
+        return restaurantInfoLiveData
     }
 
     fun fetchMoreRestaurants(lat: Double, lng: Double) {
@@ -34,6 +41,20 @@ object RestaurantRepository {
 
             override fun onFailure(call: Call<List<RestaurantBrief>>, t: Throwable) {
                 restaurantLiveData.postValue(cacheList)
+            }
+        })
+    }
+
+    fun fetchRestaurantInfo(id: Int) {
+        api.getRestaurantInfo(id).enqueue(object :Callback<RestaurantInfo>{
+            override fun onResponse(call: Call<RestaurantInfo>, response: Response<RestaurantInfo>) {
+                if (response.isSuccessful) {
+                    restaurantInfoLiveData.postValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<RestaurantInfo>, t: Throwable) {
+                restaurantInfoLiveData.postValue(null)
             }
         })
     }

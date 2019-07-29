@@ -16,10 +16,15 @@
                       android:required="false" />
         <uses-library android:name="android.test.mock"
                       android:required="false" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".RestaurantListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".RestaurantInfoActivity">
+            <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

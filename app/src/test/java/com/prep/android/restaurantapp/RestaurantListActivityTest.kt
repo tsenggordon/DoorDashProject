@@ -16,17 +16,17 @@ import org.robolectric.annotation.Config
     RobolectricTestRunner::class
 )
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
-class MainActivityTest {
+class RestaurantListActivityTest {
 
     @Test
     fun setupToolBarTest() {
-        val activity = Robolectric.buildActivity(MainActivity::class.java!!).create().start().resume().get()
+        val activity = Robolectric.buildActivity(RestaurantListActivity::class.java!!).create().start().resume().get()
         assertEquals((activity.findViewById<Toolbar>(R.id.toolbar)).title, "Discover")
     }
 
     @Test
     fun recylcerViewTest() {
-        val activity = Robolectric.buildActivity(MainActivity::class.java!!).create().start().resume().get()
+        val activity = Robolectric.buildActivity(RestaurantListActivity::class.java!!).create().start().resume().get()
         val rv = activity.findViewById<RecyclerView>(R.id.rv_list)
         val adaptor = rv.adapter as RestaurantListAdaptor
         adaptor.updateList(arrayListOf<RestaurantBrief>().apply {
